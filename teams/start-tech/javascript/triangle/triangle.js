@@ -4,6 +4,7 @@
 // Triângulo equilátero: tem os três lados do mesmo comprimento. 
 // Triângulo isócelos: tem pelo menos dois lados do mesmo comprimento. (Às vezes é especificado como tendo exatamente dois lados com o mesmo comprimento, mas para os propósitos deste exercício diremos pelo menos dois.)
 // Triângulo escaleno: tem todos os lados de diferentes comprimentos.
+// Triângulo degenerado: a soma dos comprimentos de dois lados é igual à do terceiro é conhecida como um triângulo degenerado - tem área zero e parece uma única linha.
 
 export class Triangle {
   ladoA = 0;
@@ -28,5 +29,9 @@ export class Triangle {
 
   get isScalene() {
       return (this.existenciaTriangulo && this.desigualdadeTriangulo) && (this.ladoA != this.ladoB && this.ladoB != this.ladoC && this.ladoA != this.ladoC); // Verifica se as condições de existência do triângulo foram atendidas E se é um triângulo escaleno
+  }
+
+  get isDegenerate() {
+    return (this.existenciaTriangulo && this.desigualdadeTriangulo) && (this.ladoA + this.ladoB === this.ladoC || this.ladoA + this.ladoC === this.ladoB || this.ladoB + this.ladoC === this.ladoA);
   }
 }
