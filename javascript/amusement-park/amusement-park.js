@@ -10,9 +10,9 @@
  * @returns {Visitor} the visitor that was created
  */
 export function createVisitor(name, age, ticketId) {
-  const objVisitor = { name: name,
-    age: age,
-    ticketId: ticketId
+  const objVisitor = { name,  //nome da variável será a chave e o valor o conteúdo da chave
+    age,
+    ticketId,
   };
   return objVisitor;
 }
@@ -51,9 +51,8 @@ export function ticketStatus(tickets, ticketId) {
  * @returns {string} ticket status
  */
 export function simpleTicketStatus(tickets, ticketId) {
-  if (tickets[ticketId] == undefined) return "invalid ticket !!!";  //com comparação com dois iguais engloba casos null e undefined (casos vazios e que não existem)
-
-  return tickets[ticketId];
+  //nullish coalescing operator
+  return tickets[ticketId] = tickets[ticketId] ?? "invalid ticket !!!";  // caso a variável seja nula ou undefined retorna a mensagem, caso não seja retorna a própria variável
 }
 
 /**
@@ -63,6 +62,7 @@ export function simpleTicketStatus(tickets, ticketId) {
  * @returns {string | undefined} version
  */
 export function gtcVersion(visitor) {
-  if (visitor.gtc === undefined) return undefined;  //verificar se tem chave gtc, pois não é possível ler propriedades de chave undefined (inexistente) (que seria a .version)
-  return visitor.gtc.version;  //caso chave gtc exista e não exista version será retornado undefined
+  //optional chaining operator
+  //verificar se tem chave version, contudo apenas se tiver gtc, se a chave gtc não existir já retorna undefined
+  return visitor.gtc?.version;  //caso chave gtc exista e não exista version será retornado undefined
 }
